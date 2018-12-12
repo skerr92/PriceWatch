@@ -10,6 +10,7 @@
 
 from textblob import TextBlob
 import requests
+#from requests import urlopen as urlO
 from bs4 import BeautifulSoup
 from sys import argv
 
@@ -17,21 +18,21 @@ from sys import argv
 class Analysis:
 	def __init__(self, term):
 		self.term = term
-		self.price = 0
+		self.num_products = 0
+		#self.subjectivity = 0
+		#self.sentiment = 0
 
-
-		self.url = 'https://www.google.com/search?q={0}&source=lnms&tbm=nws'.format(self.term)
+		self.url = 'https://www.google.com/search?q={0}&source=lnms&tbm=shop'.format(self.term)
 
 	def run (self):
 		response = requests.get(self.url)
 		soup = BeautifulSoup(response.text, 'html.parser')
-		headline_results = soup.find_all('div', class_='st')
-		for h in headline_results:
-			blob = TextBlob(h.get_text())
-			self.sentiment += blob.sentiment.polarity / len(headline_results)
-			self.subjectivity += blob.sentiment.subjectivity / len(headline_results)
+		product_results = soup.find_all('div', class_='sh-dlr__list-result')
+		for p in product_results:
+			self.num_products += 1
 
 
 a = Analysis(argv[1])
 a.run()
-print(a.term, 'Subjectivity: ', a.subjectivity, 'Sentiment: ', a.sentiment)
+print(a.term, 'Number of Products', a.num_products)
+
