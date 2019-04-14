@@ -25,21 +25,24 @@ uClient.close()
 #turn into beautiful soup
 page_soup = BeautifulSoup(page_html, "html.parser")
 containers = page_soup.findAll("li", {"class":"price-current"})
+description = page_soup.findAll("a", {"class":"item-title"})
 #print("$"+containers[0].strong.text + containers[0].sup.text)
 
 #set lowest price as first index item
 lowest_price = locale.atof(containers[0].strong.text + containers[0].sup.text)
-print(lowest_price)
+print('Before Sort Lowest Price: \n'+description[0].text+'\n'+'$'+str(lowest_price))
 
 #compare all prices to find and set the actual lowest price
 index = 0
+lowest_price_index = 0
 max_index = len(containers)
 while (index < max_index):
 	current_price = locale.atof(containers[index].strong.text + containers[index].sup.text)
 	if (current_price < lowest_price):
 		lowest_price = current_price
+		lowest_price_index = index
 	index += 1
 
 #print the lowest price
-print(lowest_price)
+print(description[lowest_price_index].text+'\nActual Lowest Price: $'+str(lowest_price))
 
