@@ -7,6 +7,15 @@ automate our shopping habits more.
 Our objectives for this extension are outlined in the issues tab. It is the only issue in there right now, but that might and 
 probably will change soon.
 
+<b>A Few Objectives</b>
+
+Tranlating the python code into JavaScript (probably a mix of jQuery and React) to get started.
+
+# Updates
+
+<b>May 11th, 2019</b> 
+We've added the manifest.json file needed to get started with the chrome extension as well as the content.js and scaper.js files needed. Add on and build into these files.
+
 # Getting your source code added.
 
 We want to stress that the biggest issue facing consumers today is security in the apps and extensions they use on a daily basis.
